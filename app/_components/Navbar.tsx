@@ -1,4 +1,5 @@
-import { UserButton } from "@clerk/nextjs";
+import { SignedOut, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -7,7 +8,12 @@ const Navbar = () => {
         <div>
           <span className="text-xl font-bold">LOGO HERE</span>
         </div>
-        <UserButton />
+        <div className="flex items-center gap-4">
+          <SignedOut>
+            <Link href="/sign-in" className="border px-3 py-2 rounded-full">Sign in</Link>
+          </SignedOut>
+          <UserButton />
+        </div>
       </div>
     </div>
   );
