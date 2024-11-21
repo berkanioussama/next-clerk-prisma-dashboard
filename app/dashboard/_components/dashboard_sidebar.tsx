@@ -12,7 +12,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Home, Inbox, Search } from "lucide-react";
+import { Boxes, Home, Scan } from "lucide-react";
 import Link from "next/link";
 
 const DashboardSidebar = () => {
@@ -52,17 +52,17 @@ export default DashboardSidebar;
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/dashboard",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Categories",
+    url: "/dashboard/categories",
+    icon: Scan,
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  }
+    title: "Products",
+    url: "/dashboard/users",
+    icon: Boxes,
+  },
 ]
