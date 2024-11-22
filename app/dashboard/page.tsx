@@ -2,8 +2,6 @@ import { currentUser } from "@clerk/nextjs/server";
 import UsersTable from "@/app/dashboard/_components/users_table";
 
 const Dashboard = async () => {
-
-  const user = await currentUser()
   
   return (
     <main>

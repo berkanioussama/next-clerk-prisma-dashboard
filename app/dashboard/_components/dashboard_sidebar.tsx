@@ -62,7 +62,7 @@ const items = [
   },
   {
     title: "Products",
-    url: "/dashboard/users",
+    url: "/dashboard/products",
     icon: Boxes,
   },
 ]
