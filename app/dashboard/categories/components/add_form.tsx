@@ -19,10 +19,16 @@ const AddForm = () => {
   })
 
   const handleSubmit = async (values: z.infer<typeof createCategory>) => {
-    const response = await fetch("https://catfact.ninja/fact")
+    const response = await fetch("/api/category", {
+      method: "POST",
+      body: JSON.stringify(values),
+    })
+    if (!response.ok) {
+      alert("Response not ok")
+    }
     const data = await response.json()
-    alert(data.fact)
-    handleToast(`${values.name} Category created successfully`, "success")
+    
+    handleToast(`${data.name} Category created successfully`, "success")
   }
 
   return (
