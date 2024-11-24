@@ -1,14 +1,12 @@
-import { currentUser } from "@clerk/nextjs/server";
-import UsersTable from "@/app/dashboard/_components/users_table";
+import UsersTable from "@/app/dashboard/components/users_table";
 
 const Dashboard = async () => {
-  
   return (
     <main>
-        <h2 className="text-2xl font-bold">Users</h2>
-        <UsersTable />
+      <h2 className="text-2xl font-bold">Users</h2>
+      <UsersTable />
     </main>
   );
-}
- 
+};
+
 export default Dashboard;

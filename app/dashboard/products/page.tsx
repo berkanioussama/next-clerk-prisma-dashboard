@@ -1,9 +1,12 @@
+import SectionTitle from "@/app/components/section_title";
+
 const Products = () => {
   return (
     <main>
-      <h1>Products</h1>
+      <SectionTitle title="Add Product" />
+      <SectionTitle title="Products" />
     </main>
   );
-}
- 
+};
+
 export default Products;

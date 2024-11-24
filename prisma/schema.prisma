@@ -15,8 +15,7 @@ datasource db {
 
 model Category {
   id          String      @id @default(uuid())
-  name        String?     @unique
-  image       String
+  name        String      @unique
   product Product[]
 }
 
