@@ -19,7 +19,7 @@ const AddForm = () => {
   })
 
   const handleSubmit = async (values: z.infer<typeof createCategory>) => {
-    const response = await fetch("/api/category", {
+    const response = await fetch("/api/admin/category", {
       method: "POST",
       body: JSON.stringify(values),
     })
