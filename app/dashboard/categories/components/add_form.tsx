@@ -23,12 +23,15 @@ const AddForm = () => {
       method: "POST",
       body: JSON.stringify(values),
     })
+
     if (!response.ok) {
-      alert("Response not ok")
+      const errorData = await response.json();
+      handleToast(errorData.message, "destructive");
+      return;
     }
-    const data = await response.json()
-    
-    handleToast(`${data.name} Category created successfully`, "success")
+
+    const successData = await response.json()
+    handleToast(successData.message, "success")
   }
 
   return (
