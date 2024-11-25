@@ -1,3 +1,4 @@
+import { createCategory } from "@/lib/zod";
 import { database } from "@/prisma/database";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,7 +8,11 @@ export const POST = async (request: NextRequest) => {
     if (!formValues) {
       return NextResponse.json({ message: "No form data" }, { status: 400 });
     }
-    const { name } = formValues
+    const validatedFields = createCategory.safeParse(formValues)
+    if (!validatedFields.success) {
+      return NextResponse.json({ message: validatedFields.error.message }, { status: 400 });
+    }
+    const { name } = validatedFields.data
     if (!name) {
       return NextResponse.json({ message: "Name is required" }, { status: 400 });
     }
