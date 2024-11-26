@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { handleToast } from "@/lib/handleToast";
 
-const AddForm = () => {
+const AddForm = ({ reFetchData }: { reFetchData: () => void }) => {
 
   const form = useForm<z.infer<typeof createCategory>>({
     resolver: zodResolver(createCategory),
@@ -32,6 +32,7 @@ const AddForm = () => {
 
     const successData = await response.json()
     handleToast(successData.message, "success")
+    reFetchData()
   }
 
   return (

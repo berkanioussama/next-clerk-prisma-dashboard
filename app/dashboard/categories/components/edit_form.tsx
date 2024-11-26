@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { handleToast } from "@/lib/handleToast";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
-const EditForm = ({id}: {id: string}) => {
+const EditForm = ({id, reFetchData}: {id: string, reFetchData: () => void }) => {
 
   const form = useForm<z.infer<typeof editCategory>>({
     resolver: zodResolver(editCategory),
@@ -34,6 +34,7 @@ const EditForm = ({id}: {id: string}) => {
 
     const successData = await response.json()
     handleToast(successData.message, "success")
+    reFetchData()
   }
 
   return (
