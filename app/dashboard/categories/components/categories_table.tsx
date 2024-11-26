@@ -48,7 +48,7 @@ const CategoriesTable = ({ categories, reFetchData }: { categories: Category[], 
           <TableRow key={index}>
             <TableCell>{category.id}</TableCell>
             <TableCell>{category.name}</TableCell>
-            <TableCell><EditForm id={category.id} reFetchData={reFetchData} /></TableCell>
+            <TableCell><EditForm id={category.id} name={category.name} reFetchData={reFetchData} /></TableCell>
             <TableCell><Button variant="destructive" onClick={() => deleteData(category.id)} >Delete</Button></TableCell>
           </TableRow>
         ))}

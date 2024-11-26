@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { handleToast } from "@/lib/handleToast";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
-const EditForm = ({id, reFetchData}: {id: string, reFetchData: () => void }) => {
+const EditForm = ({id, name, reFetchData}: {id: string, name: string, reFetchData: () => void }) => {
 
   const form = useForm<z.infer<typeof editCategory>>({
     resolver: zodResolver(editCategory),
@@ -44,9 +44,9 @@ const EditForm = ({id, reFetchData}: {id: string, reFetchData: () => void }) => 
       </DialogTrigger>
       <DialogContent className="sm:max-w-[30rem]">
         <DialogHeader>
-          <DialogTitle>Edit Category</DialogTitle>
+          <DialogTitle>Edit {name} Category</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to your Category here. Click update when you're done.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -61,7 +61,7 @@ const EditForm = ({id, reFetchData}: {id: string, reFetchData: () => void }) => 
                       <Input placeholder="Category Name" {...field} />
                     </FormControl>
                     <FormDescription>
-                      This is your public display name.
+                      Name should be at least 2 characters.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
