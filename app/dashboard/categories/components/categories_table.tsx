@@ -3,7 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { handleToast } from "@/lib/handleToast";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import EditForm from "@/app/dashboard/categories/components/edit_form";
 
 type Category = {
   id: string,
@@ -29,7 +30,6 @@ const CategoriesTable = () => {
     }
 
     const successData = await response.json()
-    handleToast(successData.message, "success")
 
     setCategories(successData.data)
   }
@@ -50,6 +50,11 @@ const CategoriesTable = () => {
 
     const successData = await response.json()
     handleToast(successData.message, "success")
+    fetchData();
+  }
+
+  const reFishData = () => {
+    fetchData();
   }
 
   return (
@@ -59,6 +64,7 @@ const CategoriesTable = () => {
           <TableHead >ID</TableHead>
           <TableHead >Name</TableHead>
           <TableHead >Edit</TableHead>
+          <TableHead >Delete</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -66,6 +72,7 @@ const CategoriesTable = () => {
           <TableRow key={index}>
             <TableCell>{category.id}</TableCell>
             <TableCell>{category.name}</TableCell>
+            <TableCell><EditForm id={category.id} /></TableCell>
             <TableCell><Button variant="destructive" onClick={() => deleteData(category.id)} >Delete</Button></TableCell>
           </TableRow>
         ))}

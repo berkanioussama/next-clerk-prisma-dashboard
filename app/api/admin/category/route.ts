@@ -1,4 +1,4 @@
-import { createCategory, deleteCategory } from "@/lib/zod";
+import { createCategory, deleteCategory, editCategory } from "@/lib/zod";
 import { database } from "@/prisma/database";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -28,6 +28,30 @@ export const POST = async (request: NextRequest) => {
       return NextResponse.json({ message: "Error: Failed to create category" }, { status: 500 });
     }
     
+  } catch (error) {
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  }
+}
+
+export const PUT = async (request: NextRequest) => {
+  try {
+    const values = await request.json()
+    if (!values) {
+      return NextResponse.json({ message: "No values data" }, { status: 400 });
+    }
+    const validatedFields = editCategory.safeParse(values)
+    if (!validatedFields.success) {
+      return NextResponse.json({ message: validatedFields.error.message }, { status: 400 });
+    }
+    const { id, name } = validatedFields.data
+    try {
+      const updatedData = await database.category.update({ where: { id }, data: { name } })
+      return NextResponse.json(
+        { message: `${updatedData.name} Category updated successfully` },
+        { status: 201 });
+    } catch (error) {
+      return NextResponse.json({ message: "Error: Failed to update category" }, { status: 500 });
+    }
   } catch (error) {
     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
