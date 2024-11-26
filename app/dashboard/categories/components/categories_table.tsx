@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { handleToast } from "@/lib/handleToast";
 import { use, useEffect, useState } from "react";
@@ -33,6 +34,24 @@ const CategoriesTable = () => {
     setCategories(successData.data)
   }
 
+  const deleteData = async (id: string) => {
+    const confirmAction = confirm("Are you sure to delete this category?");
+    if (!confirmAction) return
+    const response = await fetch("/api/admin/category", {
+      method: "DELETE",
+      body: JSON.stringify({id}),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      handleToast(errorData.message, "destructive");
+      return;
+    }
+
+    const successData = await response.json()
+    handleToast(successData.message, "success")
+  }
+
   return (
     <Table>
       <TableHeader>
@@ -47,7 +66,7 @@ const CategoriesTable = () => {
           <TableRow key={index}>
             <TableCell>{category.id}</TableCell>
             <TableCell>{category.name}</TableCell>
-            <TableCell></TableCell>
+            <TableCell><Button variant="destructive" onClick={() => deleteData(category.id)} >Delete</Button></TableCell>
           </TableRow>
         ))}
       </TableBody>

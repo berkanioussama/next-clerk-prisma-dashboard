@@ -1,4 +1,4 @@
-import { createCategory } from "@/lib/zod";
+import { createCategory, deleteCategory } from "@/lib/zod";
 import { database } from "@/prisma/database";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -21,7 +21,6 @@ export const POST = async (request: NextRequest) => {
       const newCategory = await database.category.create({
         data: { name },
       });
-      console.log("Category created:", newCategory);
       return NextResponse.json(
         { message: `${newCategory.name} Category created successfully` },
         { status: 201 });
@@ -32,5 +31,28 @@ export const POST = async (request: NextRequest) => {
   } catch (error) {
     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
-  
+}
+
+export const DELETE = async (request: NextRequest) => {
+  try {
+    const values = await request.json()
+    if (!values) {
+      return NextResponse.json({ message: "No values data" }, { status: 400 });
+    }
+    const validatedFields = deleteCategory.safeParse(values)
+    if (!validatedFields.success) {
+      return NextResponse.json({ message: validatedFields.error.message }, { status: 400 });
+    }
+    const { id } = validatedFields.data
+    try {
+      const deletedData = await database.category.delete({ where: { id } })
+      return NextResponse.json(
+        { message: `${deletedData.name} Category deleted successfully` },
+        { status: 201 });
+    } catch (error) {
+      return NextResponse.json({ message: "Error: Failed to delete category" }, { status: 500 });
+    }
+  } catch (error) {
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  }
 }
