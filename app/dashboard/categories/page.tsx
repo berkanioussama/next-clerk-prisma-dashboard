@@ -1,4 +1,4 @@
-import SectionTitle from "@/app/components/section_title";
+import SectionTitle from "@/app/dashboard/components/section_title";
 import AddForm from "@/app/dashboard/categories/components/add_form";
 import CategoriesTable from "./components/categories_table";
 

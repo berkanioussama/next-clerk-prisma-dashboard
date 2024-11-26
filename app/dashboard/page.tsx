@@ -1,9 +1,10 @@
 import UsersTable from "@/app/dashboard/components/users_table";
+import SectionTitle from "@/app/dashboard/components/section_title";
 
 const Dashboard = async () => {
   return (
     <main>
-      <h2 className="text-2xl font-bold">Users</h2>
+      <SectionTitle title="Users" />
       <UsersTable />
     </main>
   );

@@ -1,4 +1,4 @@
-import SectionTitle from "@/app/components/section_title";
+import SectionTitle from "@/app/dashboard/components/section_title";
 
 const Products = () => {
   return (
